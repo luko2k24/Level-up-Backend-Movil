@@ -1,10 +1,11 @@
 package cl.levelup.msvcproductos.model;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "productos")
-public class Producto {
+@Table(name = "producto") // <<< CORREGIDO: Usando 'producto' (singular)
+public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,19 @@ public class Producto {
     private Integer stock;
     private Float valoracion;
     private String descripcion;
+
+    // Mapeo explícito: Le dice a Hibernate que la variable urlImagen (camelCase)
+    // debe leer la columna url_imagen (snake_case) en la DB.
+    @Column(name = "url_imagen")
     private String urlImagen;
+
     private String fabricante;
     private Boolean destacado;
 
+    // Constructor vacío (Necesario para Hibernate)
     public Producto() {}
+
+    // --- Getters y Setters ---
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

@@ -9,7 +9,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")
+@RequestMapping("/api/producto")
 @CrossOrigin(origins = "*")
 public class ProductoController {
 
@@ -34,7 +34,7 @@ public class ProductoController {
     @PostMapping
     public ResponseEntity<Producto> crear(@RequestBody Producto p) {
         Producto creado = repo.save(p);
-        return ResponseEntity.created(URI.create("/api/productos/" + creado.getId()))
+        return ResponseEntity.created(URI.create("/api/producto/" + creado.getId()))
                 .body(creado);
     }
 
